@@ -1,7 +1,5 @@
 package tests;
 
-import types.*;
-
 public class TestsWithBingo {
 
 	public static void main(String[] args) {
