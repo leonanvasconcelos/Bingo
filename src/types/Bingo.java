@@ -4,29 +4,34 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Bingo {
-	/*
-	 * TODO método para chamar o globo propriedade que guarda os números chamados
-	 * método para marcar cartelas método para receber o(s) números identificadores
-	 * de cada
-	 */
+	/*TODO debugar as cartelas ao final da execuÃ§Ã£o
+	*TODO criar mÃ©todo para retornar os nÃºmeros da cartela vencedora
+	*/
 	private List<Cartela> cartelas;
 	private List<Integer> idCartelasBatidas;
-	private Globo globo;
+	private List<Integer> listaNumerosChamados;
+	private Globo globo;	
 
-	public Bingo() {
+	public Bingo(int quantidadeCartelas){
 		globo = new Globo();
 		idCartelasBatidas = new ArrayList<Integer>();
-		criarCartelas(1000);
+		listaNumerosChamados = new ArrayList<Integer>();
+		criarCartelas(quantidadeCartelas);
 	}
 
-	public void startBingo() {
+	public Bingo() {
+		this(5);
+	}
+
+	public void comecarBingo() {
+		System.out.println("Vamos comeÃ§ar o bingo!");
 		do {
-			int numero = globo.sortearNumero();
-			System.out.println("O número " + numero + " foi sorteado.");
-			marcarCartelas(numero);
-			// conferirCartelas();
-		} while (!temCartelasBatidas());
-		listarCartelasBatidas();
+			int numeroChamado = globo.sortearNumero();
+			System.out.println((listaNumerosChamados.size() + 1) + "Âª bola: " + numeroChamado);
+			marcarCartelas(numeroChamado);
+			listaNumerosChamados.add(numeroChamado);
+		}while (!temCartelasBatidas());
+		System.out.println("BINGO!\n As cartelas premiadas sÃ£o: \n" + idCartelasBatidas.toString());
 	}
 
 	private void criarCartelas(int quantidade) {
@@ -37,36 +42,20 @@ public class Bingo {
 	}
 
 	public void marcarCartelas(int numeroSorteado) {
-		// TODO Auto-generated method stub
 		for (Cartela c : cartelas) {
 			c.marcarNumero(numeroSorteado);
 		}
 	}
 
-	public void listarCartelasBatidas() {
-		for (int i = 0; i <= idCartelasBatidas.size() - 1; i++) {
-			System.out.println("A cartela " + idCartelasBatidas.get(i) + " bateu.");
-		}
-	}
-
-	/*
-	 * private void conferirCartelas() { // remover metodo, nao tem utilidade ja que
-	 * no temCartelasBatidas() //está sendo acrescentado no no array de batidas. if
-	 * (!idCartelasBatidas.isEmpty()) {
-	 * 
-	 * } }
-	 */
-
 	private boolean temCartelasBatidas() {
 		boolean result = false;
 		for (Cartela c : cartelas) {
-			if (c.batida()) {
+			if (c.batida()){
 				result = true;
 				idCartelasBatidas.add(c.getIdentificador());
 			}
 		}
-
 		return result;
 	}
-
+	
 }
