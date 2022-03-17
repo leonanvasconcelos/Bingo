@@ -1,35 +1,32 @@
 package types;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Cartela {
-	/* TODO refatoração
-	 * otimizar checagem do PopularCartela
-	 */
-	public static int objectCount = 0;
+	private static int contadorCartelasAtivas = 0;
 	private int identificador;
 	private List<Integer> numerosDaCartela;
 	private final int QUANTIDADE_NUMEROS = 20;
-	private int contadorMarcados;
-	private boolean bateu;
+	private int contadorNumerosMarcadosNaCartela;
 	
 	public Cartela() {
-		bateu = false;
 		populaCartela();
-		Cartela.objectCount++;
-		identificador = Cartela.objectCount;
+		Cartela.contadorCartelasAtivas++;
+		identificador = Cartela.contadorCartelasAtivas;
 	}
 	
 	private void populaCartela() {
-		Integer randomNumber;
+		Integer numAleatorio;
 		numerosDaCartela = new ArrayList<Integer>();
 		for (int i = 0; i < QUANTIDADE_NUMEROS; i++) {
 			do {
-				randomNumber = gerarNumAleatorio();
-			} while (existeNaCartela(randomNumber));
-			numerosDaCartela.add(randomNumber);
+				numAleatorio = gerarNumAleatorio();
+			} while (existeNaCartela(numAleatorio));
+			numerosDaCartela.add(numAleatorio);
 		}
+		Collections.sort(numerosDaCartela);
 	}
 	
 	private boolean existeNaCartela(Integer n) {
@@ -45,15 +42,16 @@ public class Cartela {
 	
 	public void marcarNumero(int n) {
 		if (existeNaCartela(n)) {
-			contadorMarcados++;
+			contadorNumerosMarcadosNaCartela++;
 		}
-		if (contadorMarcados == 20) {
-			bateu = true;
-		}
+
 	}
 
 	public boolean batida() {
-		return bateu;
+		if (contadorNumerosMarcadosNaCartela == QUANTIDADE_NUMEROS)
+			return true;
+		else
+			return false;
 	}
 
 	public int getIdentificador() {
