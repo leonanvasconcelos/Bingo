@@ -24,14 +24,14 @@ public class Bingo {
 	}
 
 	public void comecarBingo() {
-		System.out.println("Vamos comeÃ§ar o bingo!");
+		System.out.println("Vamos começar o bingo!");
 		do {
 			int numeroChamado = globo.sortearNumero();
-			System.out.println((listaNumerosChamados.size() + 1) + "Âª bola: " + numeroChamado);
+			System.out.println((listaNumerosChamados.size() + 1) + "ª bola: " + numeroChamado);
 			marcarCartelas(numeroChamado);
 			listaNumerosChamados.add(numeroChamado);
 		}while (!temCartelasBatidas());
-		System.out.println("BINGO!\n As cartelas premiadas sÃ£o: \n" + idCartelasBatidas.toString());
+		System.out.println("BINGO!\nAs cartelas premiadas são: \n" + idCartelasBatidas.toString());
 	}
 
 	private void criarCartelas(int quantidade) {

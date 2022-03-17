@@ -26,7 +26,7 @@ public class Cartela {
 			} while (existeNaCartela(numAleatorio));
 			numerosDaCartela.add(numAleatorio);
 		}
-		Collections.sort(numerosDaCartela);
+		//Collections.sort(numerosDaCartela);
 	}
 	
 	private boolean existeNaCartela(Integer n) {
